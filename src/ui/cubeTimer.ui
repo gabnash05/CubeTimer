@@ -172,7 +172,7 @@ color: rgb(243, 243, 243);</string>
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>assets/icons/profile.png</normaloff>assets/icons/profile.png</iconset>
+                 <normaloff>../../assets/icons/profile.png</normaloff>../../assets/icons/profile.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -374,7 +374,7 @@ QPushButton:pressed {
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>assets/icons/github_white.png</normaloff>assets/icons/github_white.png</iconset>
+                 <normaloff>../../assets/icons/github_white.png</normaloff>../../assets/icons/github_white.png</iconset>
                </property>
               </widget>
              </item>
@@ -397,7 +397,7 @@ QPushButton:pressed {
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>assets/icons/discord_white.png</normaloff>assets/icons/discord_white.png</iconset>
+                 <normaloff>../../assets/icons/discord_white.png</normaloff>../../assets/icons/discord_white.png</iconset>
                </property>
               </widget>
              </item>
@@ -420,7 +420,7 @@ QPushButton:pressed {
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>assets/icons/facebook._whitepng.png</normaloff>assets/icons/facebook._whitepng.png</iconset>
+                 <normaloff>../../assets/icons/facebook._whitepng.png</normaloff>../../assets/icons/facebook._whitepng.png</iconset>
                </property>
               </widget>
              </item>
@@ -443,7 +443,7 @@ QPushButton:pressed {
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>assets/icons/mail_white.png</normaloff>assets/icons/mail_white.png</iconset>
+                 <normaloff>../../assets/icons/mail_white.png</normaloff>../../assets/icons/mail_white.png</iconset>
                </property>
               </widget>
              </item>
