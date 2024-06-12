@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1778</width>
-    <height>867</height>
+    <width>1772</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -93,7 +93,6 @@
 	background-color: rgb(18, 18, 25);
 	color: rgb(243, 243, 243);
 	font: 125 13pt &quot;Gill Sans MT&quot;;
-	box-shadow: none;
 	outline: none;
 	border: none;
 }
@@ -199,7 +198,6 @@ color: rgb(243, 243, 243);</string>
 	color: rgb(243, 243, 243);
 	font: 125 13pt &quot;Gill Sans MT&quot;;
 	text-align: left;
-	box-shadow: none;
 	outline: none;
 	border: none;
 	padding: 5px;
@@ -325,7 +323,6 @@ QLabel {
 	background-color: rgb(18, 18, 25);
 	color: white;
 	font: 125 13pt &quot;Gill Sans MT&quot;;
-	box-shadow: none;
 	outline: none;
 	border: none;
 }
@@ -457,7 +454,6 @@ QPushButton:pressed {
 	background-color: rgb(18, 18, 25);
 	color: rgb(243, 243, 243);
 	font: 125 13pt &quot;Gill Sans MT&quot;;
-	box-shadow: none;
 	outline: none;
 	border: none;
 }
@@ -642,6 +638,12 @@ QComboBox QAbstractItemView::item{
           </item>
           <item>
            <widget class="QFrame" name="solveControlFrame">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="styleSheet">
              <string notr="true">#copyScrambleButton, #lockScrambleButton {
 	font: 125 12pt &quot;Gill Sans MT&quot;;
@@ -653,7 +655,8 @@ QPushButton {
 	font: 125 15pt &quot;Gill Sans MT&quot;;
 	outline: none;
 	border: none;
-	border-radius: 5px
+	border-radius: 5px;
+	padding: 3px;
 }
 
 QPushButton:pressed {
@@ -700,12 +703,28 @@ QPushButton:hover {
                 <string>Edit Scramble</string>
                </property>
                <property name="text">
-                <string>✎</string>
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../../assets/icons/pencil_white.png</normaloff>../../assets/icons/pencil_white.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="lockScrambleButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>20</width>
@@ -734,12 +753,28 @@ QPushButton:hover {
                 <string>Lock Scramble</string>
                </property>
                <property name="text">
-                <string>🔒</string>
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../../assets/icons/lock_white.png</normaloff>../../assets/icons/lock_white.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="copyScrambleButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>20</width>
@@ -768,7 +803,17 @@ QPushButton:hover {
                 <string>Copy Scramble</string>
                </property>
                <property name="text">
-                <string>📑</string>
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../../assets/icons/copy_white.png</normaloff>../../assets/icons/copy_white.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
                </property>
               </widget>
              </item>
@@ -799,7 +844,17 @@ QPushButton:hover {
                 <string>Retry Scramble</string>
                </property>
                <property name="text">
-                <string>↻</string>
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../../assets/icons/reset._whitepng.png</normaloff>../../assets/icons/reset._whitepng.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
                </property>
               </widget>
              </item>
@@ -823,7 +878,7 @@ QPushButton:hover {
                <property name="font">
                 <font>
                  <family>Courier New</family>
-                 <pointsize>120</pointsize>
+                 <pointsize>110</pointsize>
                  <weight>75</weight>
                  <italic>false</italic>
                  <bold>true</bold>
@@ -1064,7 +1119,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>317</width>
+                  <width>261</width>
                   <height>885</height>
                  </rect>
                 </property>
@@ -4320,7 +4375,7 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1778</width>
+     <width>1772</width>
      <height>26</height>
     </rect>
    </property>
