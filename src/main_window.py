@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
     # Key event trackers
     self.space_bar_pressed = False
     self.last_key_time = 0
-    self.debounce_threshold = 0.  # Set debounce threshold in seconds
+    self.debounce_threshold = 0.4  # Set debounce threshold in seconds
 
 
 
@@ -49,7 +49,7 @@ class MainWindow(QMainWindow):
 
       if not self.stop_watch.running:
         print(f'Your time is: {self.stop_watch.previous_time}')
-        ### Add timelist connector to save times ##########################################
+
 
   def keyReleaseEvent(self, event):
     current_time = time.time()
