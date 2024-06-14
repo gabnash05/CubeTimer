@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtGui import QIcon
-from src.main_window import MainWindow
+from src.mainWindow import MainWindow
 
 
 
@@ -9,4 +9,4 @@ if __name__ == '__main__':
     app = QApplication([])
     window = MainWindow()
     window.show()
-    app.exec()
+    app.exec() 

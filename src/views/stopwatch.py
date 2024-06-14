@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QWidget
-from PyQt5.QtCore import Qt
 import threading
 import time
 
@@ -21,7 +20,8 @@ class StopWatch(QWidget):
       self.previous_time = self.formatTime(self.time_elapsed)
       self.time_elapsed = 0
       self.running = False
-  
+      ### Add timelist connector to save times ##########################################  
+
     else:
       self.running = True
       self.timer_thread = threading.Thread(target=self.updateTimer).start()
