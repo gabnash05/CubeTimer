@@ -1,3 +1,4 @@
+import time
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtGui import QIcon
@@ -21,6 +22,10 @@ class MainWindow(QMainWindow):
     # UI Components
     self.stop_watch = StopWatch(self)
 
+    # Key event trackers
+    self.space_bar_pressed = False
+    self.last_key_time = 0
+    self.debounce_threshold = 0.  # Set debounce threshold in seconds
 
 
 
@@ -33,19 +38,29 @@ class MainWindow(QMainWindow):
 
 
 
+
+        
 
   # Handle key events
   def keyPressEvent(self, event):
-    pass
-    
-  
+    current_time = time.time()
+    if event.key() == Qt.Key_Space and current_time - self.last_key_time >= self.debounce_threshold:
+      self.stop_watch.timer_display.setStyleSheet("color: rgb(0, 181, 6)")
+
+      if not self.stop_watch.running:
+        print(f'Your time is: {self.stop_watch.previous_time}')
+        ### Add timelist connector to save times ##########################################
+
   def keyReleaseEvent(self, event):
-    if event.key() == Qt.Key_Space:
+    current_time = time.time()
+    if event.key() == Qt.Key_Space and current_time - self.last_key_time >= self.debounce_threshold:
+      
+      self.stop_watch.timer_display.setStyleSheet("color: rgb(243, 243, 243)")
       self.stop_watch.startTimer()
-    
-    if not self.stop_watch.running:
-      print(f'Your time is: {self.stop_watch.previous_time}')
-      ### Add timelist connector to save times ##########################################
+      
+      self.space_bar_pressed = False
+
+    self.last_key_time = time.time()  # Reset last_press_time on valid release
            
   
   # Handle close window event to prevent thread issues

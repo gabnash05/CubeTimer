@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1772</width>
-    <height>718</height>
+    <width>1757</width>
+    <height>695</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1119,7 +1119,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>261</width>
+                  <width>240</width>
                   <height>885</height>
                  </rect>
                 </property>
@@ -4375,7 +4375,7 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1772</width>
+     <width>1757</width>
      <height>26</height>
     </rect>
    </property>
