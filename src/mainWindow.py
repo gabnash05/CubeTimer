@@ -23,19 +23,10 @@ class MainWindow(QMainWindow):
     # UI Components
     self.stop_watch = StopWatch(self)
 
-    # Database Test
-    #self.database = DatabaseModel(self)
-
     # Key event trackers
     self.space_bar_pressed = False
     self.last_key_time = 0
     self.debounce_threshold = 0.04  # Set debounce threshold in seconds
-
-
-
-
-
-
 
 
 

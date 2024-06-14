@@ -3,10 +3,13 @@ from PyQt5.QtWidgets import QWidget
 import threading
 import time
 
+from src.controllers.stopwatchController import StopwatchController
+
 class StopWatch(QWidget):
   def __init__(self, main_window):
     super(StopWatch, self).__init__()
     self.timer_display = main_window.timerDisplay
+    self.stopwatch_controller = StopwatchController(main_window)
 
     # Stopwatch variables------------------------------------------
     self.running = False
@@ -20,7 +23,10 @@ class StopWatch(QWidget):
       self.previous_time = self.formatTime(self.time_elapsed)
       self.time_elapsed = 0
       self.running = False
-      ### Add timelist connector to save times ##########################################  
+      
+      ### Use stopwatch_controller to save time into databases
+      self.stopwatch_controller.uploadTime(self.previous_time)
+
 
     else:
       self.running = True
