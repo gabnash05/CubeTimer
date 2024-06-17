@@ -4,7 +4,7 @@ from PyQt5.QtGui import QIcon
 from src.mainWindow import MainWindow
 
 
-
+ 
 if __name__ == '__main__':
     app = QApplication([])
     window = MainWindow()

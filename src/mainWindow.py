@@ -5,8 +5,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 import os
 
-from .views.stopwatch import StopWatch
-from .models.databaseModel import DatabaseModel
+from src.views.stopwatch import StopWatch
+from src.views.recentTimesDisplay import RecentTimesDisplay
 
 
 class MainWindow(QMainWindow):
@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
 
     # UI Components
     self.stop_watch = StopWatch(self)
+    self.recent_times_display = RecentTimesDisplay(self)
 
     # Key event trackers
     self.space_bar_pressed = False
@@ -46,9 +47,6 @@ class MainWindow(QMainWindow):
       self.stop_watch.startTimer()
       
       self.space_bar_pressed = False
-    
-      if not self.stop_watch.running:
-          print(f'Your time is: {self.stop_watch.previous_time}')
 
     self.last_key_time = time.time()  # Reset last_press_time on valid release
            

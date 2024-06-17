@@ -1,0 +1,1 @@
+self.recentTime_7 = QtWidgets.QFrame(self.recentTimesFrame)

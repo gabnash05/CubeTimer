@@ -3,13 +3,16 @@ from PyQt5.QtWidgets import QWidget
 import threading
 import time
 
-from src.controllers.stopwatchController import StopwatchController
+from src.controllers.timesController import TimesController
+from src.views.recentTimesDisplay import RecentTimesDisplay
+
 
 class StopWatch(QWidget):
   def __init__(self, main_window):
     super(StopWatch, self).__init__()
     self.timer_display = main_window.timerDisplay
-    self.stopwatch_controller = StopwatchController(main_window)
+    self.times_controller = TimesController(main_window)
+    self.recent_times_display = RecentTimesDisplay(main_window)
 
     # Stopwatch variables------------------------------------------
     self.running = False
@@ -24,10 +27,12 @@ class StopWatch(QWidget):
       self.time_elapsed = 0
       self.running = False
       
-      ### Use stopwatch_controller to save time into databases
-      self.stopwatch_controller.uploadTime(self.previous_time)
+      # Use times_controller to save time into databases
+      self.times_controller.uploadTime(str(self.previous_time))
 
-
+      # Update recent times
+      self.recent_times_display.renderList()
+    
     else:
       self.running = True
       self.timer_thread = threading.Thread(target=self.updateTimer).start()
