@@ -5,6 +5,7 @@ import time
 
 from src.controllers.timesController import TimesController
 from src.views.recentTimesDisplay import RecentTimesDisplay
+from src.views.scrambleDisplay import ScrambleDisplay
 
 
 class StopWatch(QWidget):
@@ -13,6 +14,7 @@ class StopWatch(QWidget):
     self.timer_display = main_window.timerDisplay
     self.times_controller = TimesController(main_window)
     self.recent_times_display = RecentTimesDisplay(main_window)
+    self.scramble_display = ScrambleDisplay(main_window)
 
     # Stopwatch variables------------------------------------------
     self.running = False
@@ -32,6 +34,7 @@ class StopWatch(QWidget):
 
       # Update recent times
       self.recent_times_display.renderList()
+      self.scramble_display.renderScramble()
     
     else:
       self.running = True

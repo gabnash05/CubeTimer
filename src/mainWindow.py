@@ -7,6 +7,7 @@ import os
 
 from src.views.stopwatch import StopWatch
 from src.views.recentTimesDisplay import RecentTimesDisplay
+from src.views.scrambleDisplay import ScrambleDisplay
 
 
 class MainWindow(QMainWindow):
@@ -23,6 +24,7 @@ class MainWindow(QMainWindow):
     # UI Components
     self.stop_watch = StopWatch(self)
     self.recent_times_display = RecentTimesDisplay(self)
+    self.scramble_display = ScrambleDisplay(self)
 
     # Key event trackers
     self.last_key_time = 0

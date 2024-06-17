@@ -7,10 +7,12 @@ from src.models.databaseModel import DatabaseModel
 class TimesController():
   def __init__(self, main_window):
     self.db = DatabaseModel()
-    self.scramble = main_window.scrambleLabel.text()
+    self.main_window = main_window
+    
 
 
   def uploadTime(self, solve_time):
+    self.scramble = self.main_window.scrambleLabel.text()
     self.db.saveTimeRecord(solve_time, self.scramble)
     
 
