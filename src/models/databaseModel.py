@@ -82,20 +82,35 @@ class DatabaseModel():
 
     solve_time_query = f'SELECT solve_time, is_plus_2 FROM three_cube_times WHERE id = {solve_id}'
     self.cursor.execute(solve_time_query)
-    time = self.cursor.fetchall()
+    query_result = self.cursor.fetchall()
 
-    if time[0][1] == 0:
-      time_plus2 = float(time[0][0]) + 2
+    if query_result[0][1] == 0:
+      time_plus2 = float(query_result[0][0]) + 2
       time_plus2_formatted = add_zero_to_time(str(time_plus2))
 
       update_time_query = f'UPDATE three_cube_times SET solve_time = {time_plus2_formatted}, is_plus_2 = True WHERE id = {solve_id}'
       self.cursor.execute(update_time_query)
-      self.connection.commit()
-
     else:
-      time_plus2 = float(time[0][0]) - 2
+      time_plus2 = float(query_result[0][0]) - 2
       time_plus2_formatted = add_zero_to_time(str(time_plus2))
 
       update_time_query = f'UPDATE three_cube_times SET solve_time = {time_plus2_formatted}, is_plus_2 = False WHERE id = {solve_id}'
       self.cursor.execute(update_time_query)
-      self.connection.commit()
+    
+    self.connection.commit()
+  
+  def dnfTimeRecord(self, solve_id):
+    self._refresh_connection()
+
+    solve_dnf_query = f'SELECT is_DNF FROM three_cube_times WHERE id = {solve_id}'
+    self.cursor.execute(solve_dnf_query)
+    query_result = self.cursor.fetchall()
+
+    if query_result[0][0] == 0:
+      update_time_query = f'UPDATE three_cube_times SET is_DNF = True WHERE id = {solve_id}'
+      self.cursor.execute(update_time_query)
+    else:
+      update_time_query = f'UPDATE three_cube_times SET is_DNF = False WHERE id = {solve_id}'
+      self.cursor.execute(update_time_query)
+    
+    self.connection.commit()

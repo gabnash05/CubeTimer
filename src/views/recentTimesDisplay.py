@@ -41,7 +41,6 @@ class RecentTimesDisplay(QWidget):
       widget = item.widget()
       if widget is not None:
         widget.deleteLater()
-    
 
   def renderTime(self, solveId, solveTime, isPlus2, isDNF):
     # Create a new QFrame to contain the time record
@@ -74,7 +73,7 @@ class RecentTimesDisplay(QWidget):
     sizePolicy.setVerticalStretch(0)
     sizePolicy.setHeightForWidth(solveTimeButton.sizePolicy().hasHeightForWidth())
     solveTimeButton.setSizePolicy(sizePolicy)
-    solveTimeButton.setMinimumSize(QtCore.QSize(47, 0))
+    solveTimeButton.setMinimumSize(QtCore.QSize(87, 0))
     solveTimeButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
     solveTimeButton.setStyleSheet("color: rgb(0, 181, 6); font-size: 14pt;")
     solveTimeButton.setFlat(True)
@@ -82,7 +81,7 @@ class RecentTimesDisplay(QWidget):
     horizontalLayout_4.addWidget(solveTimeButton)
 
     # Spacer
-    spacerItem = QtWidgets.QSpacerItem(121, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+    spacerItem = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
     horizontalLayout_4.addItem(spacerItem)
 
     # Plus 2 button
@@ -152,18 +151,21 @@ class RecentTimesDisplay(QWidget):
     # Add connection for the buttons
     deleteTimeButton.pressed.connect(lambda solve_id=solveId:self.deleteTime(solve_id))
     plus2Button.pressed.connect(lambda solve_id=solveId:self.plus2(solve_id))
+    dnfButton.pressed.connect(lambda solve_id=solveId:self.dnf(solve_id))
 
     # Add the recentTime widget to vertical_layout_6
     self.vertical_layout_6.addWidget(recentTime)
-    
   
   def deleteTime(self, solve_id):
     self.times_controller.deleteTime(solve_id)
     self.renderList()
-  
 
   def plus2(self, solve_id):
-    self.times_controller.plus2(solve_id)
+    self.times_controller.plus2Time(solve_id)
+    self.renderList()
+  
+  def dnf(self, solve_id):
+    self.times_controller.dnfTime(solve_id)
     self.renderList()
 
 

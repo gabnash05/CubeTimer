@@ -23,8 +23,11 @@ class TimesController():
     except Exception as e:
       print(str(e))
   
-  def plus2(self, solve_id):
+  def plus2Time(self, solve_id):
     self.db.plus2TimeRecord(solve_id)
+
+  def dnfTime(self, solve_id):
+    self.db.dnfTimeRecord(solve_id)
 
   def confirmDeletion(self):
     msgBox = QMessageBox()
