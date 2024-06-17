@@ -23,12 +23,15 @@ class MainWindow(QMainWindow):
 
     # UI Components
     self.stop_watch = StopWatch(self)
-    self.recent_times_display = RecentTimesDisplay(self)
-    self.scramble_display = ScrambleDisplay(self)
+    #self.recent_times_display = RecentTimesDisplay(self)
 
     # Key event trackers
     self.last_key_time = 0
     self.debounce_threshold = 0.04  # Set debounce threshold in seconds
+
+
+
+
 
 
 
@@ -42,7 +45,7 @@ class MainWindow(QMainWindow):
 
   def keyReleaseEvent(self, event):
     current_time = time.time()
-    if self.stop_watch.running:
+    if self.stop_watch.running and current_time - self.last_key_time >= self.debounce_threshold:
       self.stop_watch.startTimer()
       self.stop_watch.timer_display.setStyleSheet("color: rgb(243, 243, 243)")
     else:
