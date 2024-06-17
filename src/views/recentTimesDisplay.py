@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QWidget, QFrame
+from PyQt5.QtWidgets import QWidget
 
 from src.controllers.timesController import TimesController
 
@@ -12,29 +12,27 @@ class RecentTimesDisplay(QWidget):
     # Layout variables
     self.recent_times_frame = main_window.recentTimesFrame
     self.vertical_layout_6 = main_window.verticalLayout_6
-    
 
     # Render list of recent times
     self.renderList()
 
 
-
   def renderList(self):
     self.clearFrame()
-    recentTimes = self.times_controller.getRecentTimes()
+    recent_times = self.times_controller.getRecentTimes()
 
-    for time in recentTimes:
-      solveId = time[0]
-      solveTime = time[1]
-      isPlus2 = False
-      isDNF = False
+    for time in recent_times:
+      solve_id = time[0]
+      solve_time = time[1]
+      is_plus_2 = False
+      is_DNF = False
 
       if time[4] == 1:
-        isPlus2 = True
+        is_plus_2 = True
       if time[5] == 1:
-        isDNF = True
+        is_DNF = True
       
-      self.renderTime(solveId, solveTime, isPlus2, isDNF)
+      self.renderTime(solve_id, solve_time, is_plus_2, is_DNF)
 
 
   def clearFrame(self):
@@ -44,7 +42,6 @@ class RecentTimesDisplay(QWidget):
       if widget is not None:
         widget.deleteLater()
     
-  
 
   def renderTime(self, solveId, solveTime, isPlus2, isDNF):
     # Create a new QFrame to contain the time record
@@ -152,10 +149,22 @@ class RecentTimesDisplay(QWidget):
     dnfButton.setText(_translate("recentTimesDisplay", "DNF"))
     deleteTimeButton.setText(_translate("recentTimesDisplay", "X"))
 
+    # Add connection for the buttons
+    deleteTimeButton.pressed.connect(lambda solve_id=solveId:self.deleteTime(solve_id))
+    plus2Button.pressed.connect(lambda solve_id=solveId:self.plus2(solve_id))
+
     # Add the recentTime widget to vertical_layout_6
     self.vertical_layout_6.addWidget(recentTime)
     
+  
+  def deleteTime(self, solve_id):
+    self.times_controller.deleteTime(solve_id)
+    self.renderList()
+  
 
+  def plus2(self, solve_id):
+    self.times_controller.plus2(solve_id)
+    self.renderList()
 
 
    

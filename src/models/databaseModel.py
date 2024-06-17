@@ -1,5 +1,6 @@
 import mysql.connector
 from config import DATABASE_CONNECTION
+from src.util.addZeroToTime import add_zero_to_time
 
 class DatabaseModel():
   def __init__(self):
@@ -64,4 +65,37 @@ class DatabaseModel():
 
       return result
   
+
+  def deleteTimeRecord(self, solve_id):
+    self._refresh_connection()
+
+    try:
+      query = f'DELETE FROM three_cube_times WHERE id = {solve_id}'
+      self.cursor.execute(query)
+      self.connection.commit()
+    except Exception as e:
+      return e
   
+
+  def plus2TimeRecord(self, solve_id):
+    self._refresh_connection()
+
+    solve_time_query = f'SELECT solve_time, is_plus_2 FROM three_cube_times WHERE id = {solve_id}'
+    self.cursor.execute(solve_time_query)
+    time = self.cursor.fetchall()
+
+    if time[0][1] == 0:
+      time_plus2 = float(time[0][0]) + 2
+      time_plus2_formatted = add_zero_to_time(str(time_plus2))
+
+      update_time_query = f'UPDATE three_cube_times SET solve_time = {time_plus2_formatted}, is_plus_2 = True WHERE id = {solve_id}'
+      self.cursor.execute(update_time_query)
+      self.connection.commit()
+
+    else:
+      time_plus2 = float(time[0][0]) - 2
+      time_plus2_formatted = add_zero_to_time(str(time_plus2))
+
+      update_time_query = f'UPDATE three_cube_times SET solve_time = {time_plus2_formatted}, is_plus_2 = False WHERE id = {solve_id}'
+      self.cursor.execute(update_time_query)
+      self.connection.commit()
