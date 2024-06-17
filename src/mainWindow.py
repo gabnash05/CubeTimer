@@ -25,7 +25,6 @@ class MainWindow(QMainWindow):
     self.recent_times_display = RecentTimesDisplay(self)
 
     # Key event trackers
-    self.space_bar_pressed = False
     self.last_key_time = 0
     self.debounce_threshold = 0.04  # Set debounce threshold in seconds
 
@@ -41,13 +40,14 @@ class MainWindow(QMainWindow):
 
   def keyReleaseEvent(self, event):
     current_time = time.time()
-    if event.key() == Qt.Key_Space and current_time - self.last_key_time >= self.debounce_threshold:
-      
-      self.stop_watch.timer_display.setStyleSheet("color: rgb(243, 243, 243)")
+    if self.stop_watch.running:
       self.stop_watch.startTimer()
-      
-      self.space_bar_pressed = False
-
+      self.stop_watch.timer_display.setStyleSheet("color: rgb(243, 243, 243)")
+    else:
+      if event.key() == Qt.Key_Space and current_time - self.last_key_time >= self.debounce_threshold:
+        self.stop_watch.timer_display.setStyleSheet("color: rgb(243, 243, 243)")
+        self.stop_watch.startTimer()
+        
     self.last_key_time = time.time()  # Reset last_press_time on valid release
            
   

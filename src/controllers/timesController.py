@@ -9,9 +9,11 @@ class TimesController():
     self.db = DatabaseModel()
     self.scramble = main_window.scrambleLabel.text()
 
+
   def uploadTime(self, solve_time):
     self.db.saveTimeRecord(solve_time, self.scramble)
     
+
   def getRecentTimes(self):
     recent_times = self.db.getTimeRecords()
     return recent_times
@@ -23,11 +25,14 @@ class TimesController():
     except Exception as e:
       print(str(e))
   
+
   def plus2Time(self, solve_id):
     self.db.plus2TimeRecord(solve_id)
 
+
   def dnfTime(self, solve_id):
     self.db.dnfTimeRecord(solve_id)
+
 
   def confirmDeletion(self):
     msgBox = QMessageBox()

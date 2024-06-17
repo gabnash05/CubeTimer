@@ -99,6 +99,7 @@ class DatabaseModel():
     
     self.connection.commit()
   
+  
   def dnfTimeRecord(self, solve_id):
     self._refresh_connection()
 
