@@ -24,7 +24,7 @@ class ScrambleDisplay(QWidget):
     self.scramble_locked = False
 
     self.renderScramble()
-    print("load")
+
   
   def editScramble(self):
     self.input_dialog = self.inputScrambleDialog(self, self.scramble_display)
