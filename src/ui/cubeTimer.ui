@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1753</width>
-    <height>695</height>
+    <width>1807</width>
+    <height>696</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -538,8 +538,11 @@ QFrame {
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
+             <item row="0" column="0" alignment="Qt::AlignRight">
               <widget class="QFrame" name="frame">
+               <property name="cursor">
+                <cursorShape>ArrowCursor</cursorShape>
+               </property>
                <property name="styleSheet">
                 <string notr="true">
 QComboBox {
@@ -567,6 +570,21 @@ QComboBox QAbstractItemView {
 
 QComboBox QAbstractItemView::item{
 	font: 125 20pt &quot;Gill Sans MT&quot;;
+}
+
+QPushButton {
+	background-color: rgb(31, 31, 40);
+	color: rgb(243, 243, 243);
+	font: 125 15pt &quot;Gill Sans MT&quot;;
+	text-align: left;
+	outline: none;
+	border: none;
+	padding: 5px;
+	border-radius: 7px;
+}
+
+QPushButton:hover {
+	background-color: rgb(38, 38, 45);
 }</string>
                </property>
                <property name="frameShape">
@@ -575,11 +593,11 @@ QComboBox QAbstractItemView::item{
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_8">
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
                 <property name="topMargin">
                  <number>0</number>
                 </property>
-                <item alignment="Qt::AlignRight|Qt::AlignVCenter">
+                <item>
                  <widget class="QComboBox" name="comboBox">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -639,6 +657,22 @@ QComboBox QAbstractItemView::item{
                   </item>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QPushButton" name="exitFocusButton">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string>X</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </widget>
              </item>
@@ -648,7 +682,7 @@ QComboBox QAbstractItemView::item{
           <item>
            <widget class="QFrame" name="solveControlFrame">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -691,6 +725,12 @@ QPushButton:hover {
              </property>
              <item>
               <widget class="QPushButton" name="editScrambleButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>20</width>
@@ -827,7 +867,7 @@ QPushButton:hover {
              <item>
               <widget class="QPushButton" name="resetScrambleButton">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -890,6 +930,9 @@ QPushButton:hover {
                  <italic>false</italic>
                  <bold>true</bold>
                 </font>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::StrongFocus</enum>
                </property>
                <property name="text">
                 <string>0.00</string>
@@ -1126,8 +1169,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>257</width>
-                  <height>170</height>
+                  <width>339</width>
+                  <height>171</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -1197,6 +1240,10 @@ QPushButton:pressed {
 	border-radius: 15px;
 	color: rgb(243, 243, 243);
 	font: 125 20pt &quot;Gill Sans MT&quot;;
+}
+
+#pbDisplay {
+	font: 125 27pt &quot;Gill Sans MT&quot;;
 }
 
 #pbLabel, #ao5pbLabel, #ao12pbLabel, #worstLabel, #avgLabel, #ao5Label, #ao12Label {
@@ -1415,7 +1462,7 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1753</width>
+     <width>1807</width>
      <height>26</height>
     </rect>
    </property>

@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget
 
 from src.controllers.timesController import TimesController
+from src.util.formatFunctions import formatTime
 
 class RecentTimesDisplay(QWidget):
   def __init__(self, main_window):
@@ -23,8 +24,8 @@ class RecentTimesDisplay(QWidget):
 
     for time in recent_times:
       solve_id = time[0]
-      solve_time = time[1]
-      is_plus_2 = False
+      solve_time = formatTime(time[1])
+      is_plus_2 = False 
       is_DNF = False
 
       if time[4] == 1:

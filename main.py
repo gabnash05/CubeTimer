@@ -10,3 +10,5 @@ if __name__ == '__main__':
     window.setWindowTitle("Cube Timer")
     window.show()
     app.exec()
+
+# 
