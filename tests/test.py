@@ -5,3 +5,4 @@ for index, item in enumerate(list1):
   list2[index] = item
 
 print(list2)
+

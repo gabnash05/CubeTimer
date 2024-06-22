@@ -6,7 +6,6 @@ import time
 from src.controllers.timesController import TimesController
 from src.views.recentTimesDisplay import RecentTimesDisplay
 from src.views.scrambleDisplay import ScrambleDisplay
-from src.views.timeStatsDisplay import TimeStatsDisplay
 from src.util.formatFunctions import formatTime
 
 

@@ -255,7 +255,7 @@ class DatabaseModel():
     self._refresh_connection()
 
     try:
-      self.cursor.execute("SELECT AVG(solve_time) FROM three_cube_times")
+      self.cursor.execute("SELECT AVG(solve_time) FROM three_cube_times WHERE is_DNF = FALSE")
       total_average = self.cursor.fetchall()
 
       if total_average[0][0]:

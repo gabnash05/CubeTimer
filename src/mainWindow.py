@@ -3,7 +3,6 @@ import threading
 import time
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 import os
 
@@ -11,6 +10,8 @@ from src.views.stopwatch import StopWatch
 from src.views.recentTimesDisplay import RecentTimesDisplay
 from src.views.scrambleDisplay import ScrambleDisplay
 from src.views.timeStatsDisplay import TimeStatsDisplay
+from src.controllers.timesController import TimesController
+from src.util.formatFunctions import formatStringToSeconds
 
 
 class MainWindow(QMainWindow):
@@ -30,12 +31,15 @@ class MainWindow(QMainWindow):
     # UI Components
     self.stop_watch = StopWatch(self)
     self.time_stats_display = TimeStatsDisplay(self)
+    self.times_controller = TimesController(self)
+    self.recent_times_display = RecentTimesDisplay(self)
 
     # Key event trackers
     self.last_key_time = 0
     self.debounce_threshold = 0.04  # Set debounce threshold in seconds
     
     self.viewing_mode = "Default"
+    self.time_input = None
 
     # Separate threads
     self.time_stats_thread = threading.Thread(target=self.updateTimeStats)
@@ -46,9 +50,21 @@ class MainWindow(QMainWindow):
     # UI buttons
     self.viewing_mode_combobox = self.viewingModeComboBox
     self.viewing_mode_combobox.currentTextChanged.connect(self.changeViewingMode)
+
     self.exit_focus_button = self.exitFocusButton
     self.exit_focus_button.hide()
     self.exit_focus_button.pressed.connect(self.exitFocusMode)
+
+    self.manual_entry_frame = self.manualEntryFrame
+    self.manual_entry_frame.hide()
+
+    self.timer_mode_combobox = self.timerModeComboBox
+    self.timer_mode_combobox.currentTextChanged.connect(self.changeTimeInputMode)
+
+    self.timer_display = self.timerDisplay
+
+    self.save_manual_entry_button = self.saveManualEntryButton
+    self.save_manual_entry_button.pressed.connect(self.manualInputTime)
   
 
 
@@ -75,6 +91,30 @@ class MainWindow(QMainWindow):
     self.viewing_mode_combobox.setCurrentText(self.viewing_mode)
 
 
+  # Input mode update
+  def changeTimeInputMode(self, value):
+    if value == "Timer":
+      self.time_input = "Timer"
+      self.timer_display.show()
+      self.manual_entry_frame.hide()
+    if value == "Manual Entry":
+      self.time_input = "Manual Entry"
+      self.timer_display.hide()
+      self.manual_entry_frame.show()
+      
+
+  def manualInputTime(self):
+    try:
+      time = self.manualEntryInput.text()
+      self.manualEntryInput.clear()
+
+      self.times_controller.uploadTime(float(str(formatStringToSeconds(time)) + "01"))
+      self.recent_times_display.renderList()
+      self.stop_watch.scramble_display.renderScramble()
+    except Exception as e:
+      print(str(e))
+
+
   # Constant Time Stats update------------------------------------------------------------------
   def updateTimeStats(self):
     while not self.stop_event.is_set():
@@ -82,12 +122,18 @@ class MainWindow(QMainWindow):
       time.sleep(.5)  # Adding sleep to prevent tight loop
   
 
-
   # Handle key events------------------------------------------------------------------
   def keyPressEvent(self, event):
     current_time = time.time()
     if event.key() == Qt.Key_Space and current_time - self.last_key_time >= self.debounce_threshold:
       self.stop_watch.timer_display.setStyleSheet("color: rgb(0, 181, 6)")
+
+    if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
+      if self.time_input == "Manual Entry":
+        try:
+          self.manualInputTime()
+        except Exception as e:
+          print(str(e))
 
   def keyReleaseEvent(self, event):
     current_time = time.time()
@@ -102,7 +148,6 @@ class MainWindow(QMainWindow):
     self.last_key_time = time.time()  # Reset last_press_time on valid release
     
            
-  
   # Handle close window event to prevent thread issues
   def closeEvent(self, event):
     self.stop_event.set()
