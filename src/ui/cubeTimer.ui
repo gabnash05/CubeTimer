@@ -679,7 +679,7 @@ QPushButton:hover {
             </layout>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QFrame" name="solveControlFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -718,10 +718,10 @@ QPushButton:hover {
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_22">
              <property name="leftMargin">
-              <number>450</number>
+              <number>0</number>
              </property>
              <property name="rightMargin">
-              <number>450</number>
+              <number>0</number>
              </property>
              <item>
               <widget class="QPushButton" name="editScrambleButton">
