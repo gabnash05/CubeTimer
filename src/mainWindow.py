@@ -1,7 +1,8 @@
-from threading import Event, Thread
+from threading import Event
 import threading
 import time
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QIcon
 from PyQt5 import uic
 from PyQt5.QtCore import Qt
 import os
@@ -20,6 +21,10 @@ class MainWindow(QMainWindow):
     # Load UI File
     ui_path = os.path.join(os.path.dirname(__file__), "E:/Programming/Programming Practice/CubeTimer/src/ui/cubeTimer.ui")
     uic.loadUi(ui_path, self)
+
+    # Load icon
+    icon_path = 'E:/Programming/Programming Practice/CubeTimer/assets/icons/logo_no_name.png'
+    self.setWindowIcon(QIcon(icon_path))
 
     # Set up
     self.setFocusPolicy(Qt.StrongFocus)
