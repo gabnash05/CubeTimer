@@ -41,6 +41,8 @@ class MainWindow(QMainWindow):
     self.viewing_mode = "Default"
     self.time_input = None
 
+    self.is_viewing_time = False
+
     # Separate threads
     self.time_stats_thread = threading.Thread(target=self.updateTimeStats)
     self.time_stats_thread.start()
@@ -102,7 +104,6 @@ class MainWindow(QMainWindow):
       self.timer_display.hide()
       self.manual_entry_frame.show()
       
-
   def manualInputTime(self):
     try:
       time = self.manualEntryInput.text()
@@ -116,11 +117,23 @@ class MainWindow(QMainWindow):
 
 
   # Constant Time Stats update------------------------------------------------------------------
+  def startUpdateTimeThread(self):
+    if not self.time_stats_thread or not self.time_stats_thread.is_alive():
+      self.stop_event.clear()
+      self.time_stats_thread = threading.Thread(target=self.updateTimeStats)
+      self.time_stats_thread.start()
+  
   def updateTimeStats(self):
     while not self.stop_event.is_set():
       self.time_stats_display.renderStatsDisplay()
       time.sleep(.5)  # Adding sleep to prevent tight loop
   
+  def stopUpdateTimeThread(self):
+    if self.time_stats_thread and self.time_stats_thread.is_alive():
+      self.stop_event.set()
+      self.time_stats_thread.join()
+
+
 
   # Handle key events------------------------------------------------------------------
   def keyPressEvent(self, event):

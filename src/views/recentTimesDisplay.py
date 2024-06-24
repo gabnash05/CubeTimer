@@ -2,6 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget
 
 from src.controllers.timesController import TimesController
+from src.views.timeInfoBox import TimeInfoBox
+
 from src.util.formatFunctions import formatTime
 
 class RecentTimesDisplay(QWidget):
@@ -9,6 +11,7 @@ class RecentTimesDisplay(QWidget):
     super(RecentTimesDisplay, self).__init__()
     self.recent_times_display = main_window.recentTimesDisplay
     self.times_controller = TimesController(main_window)
+    self.main_window = main_window
 
     # Layout variables
     self.recent_times_frame = main_window.recentTimesFrame
@@ -134,13 +137,6 @@ class RecentTimesDisplay(QWidget):
     horizontalLayout_4.setStretch(4, 1)
     horizontalLayout_4.setStretch(5, 1)
 
-    # Change plus2 and DNF button color
-    if isPlus2:
-        plus2Button.setStyleSheet("color: #747474; font-size: 14pt;")
-    if isDNF:
-        dnfButton.setStyleSheet("color: #747474; font-size: 14pt;")
-        solveTimeButton.setStyleSheet("color: #747474; font-size: 14pt;")
-
     # Set text
     _translate = QtCore.QCoreApplication.translate
     solveCountLabel.setText(_translate("recentTimesDisplay", f'{solveId}.'))
@@ -149,14 +145,26 @@ class RecentTimesDisplay(QWidget):
     dnfButton.setText(_translate("recentTimesDisplay", "DNF"))
     deleteTimeButton.setText(_translate("recentTimesDisplay", "X"))
 
+    # Change plus2 and DNF button color
+    if isPlus2:
+        plus2Button.setStyleSheet("color: #747474; font-size: 14pt;")
+    if isDNF:
+        dnfButton.setStyleSheet("color: #747474; font-size: 14pt;")
+        solveTimeButton.setStyleSheet("color: #747474; font-size: 14pt;")
+        solveTimeButton.setText(_translate("recentTimesDisplay", "DNF"))
+
     # Add connection for the buttons
     deleteTimeButton.pressed.connect(lambda solve_id=solveId:self.deleteTime(solve_id))
     plus2Button.pressed.connect(lambda solve_id=solveId:self.plus2(solve_id))
     dnfButton.pressed.connect(lambda solve_id=solveId:self.dnf(solve_id))
+    solveTimeButton.pressed.connect(lambda solve_id=solveId:self.openTimeInfo(solve_id))
 
     # Add the recentTime widget to vertical_layout_6
     self.vertical_layout_6.addWidget(recentTime)
   
+
+
+
   def deleteTime(self, solve_id):
     self.times_controller.deleteTime(solve_id)
     self.renderList()
@@ -168,6 +176,13 @@ class RecentTimesDisplay(QWidget):
   def dnf(self, solve_id):
     self.times_controller.dnfTime(solve_id)
     self.renderList()
+  
+  def openTimeInfo(self, solve_id):
+    if not self.main_window.is_viewing_time:
+      self.main_window.stopUpdateTimeThread()
+      self.main_window.is_viewing_time = True
+      self.time_info_box = TimeInfoBox(solve_id, self, self.main_window)
+      self.time_info_box.show()
 
 
    

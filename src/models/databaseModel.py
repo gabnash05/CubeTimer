@@ -63,6 +63,14 @@ class DatabaseModel():
     self.cursor.execute(query, (solve_time, scramble))
     self.connection.commit()
 
+  def searchTimeRecord(self, solve_id):
+    self._refresh_connection()
+
+    query = "SELECT * FROM three_cube_times WHERE id = %s"
+    self.cursor.execute(query, (solve_id,))
+    result = self.cursor.fetchall()
+    return result
+
   def getTimeRecords(self):
     self._refresh_connection()
 
@@ -85,6 +93,16 @@ class DatabaseModel():
 
       return result
   
+  def updateTimeScramble(self, solve_id, solve_scramble):
+    self._refresh_connection()
+    
+    try:
+      update_time_query = 'UPDATE three_cube_times SET scramble = (%s) WHERE id = (%s)'
+      self.cursor.execute(update_time_query, (solve_scramble, solve_id))
+      self.connection.commit()
+    except Exception as e:
+      print(str(e))
+
   def deleteTimeRecord(self, solve_id):
     self._refresh_connection()
 
@@ -261,5 +279,27 @@ class DatabaseModel():
       if total_average[0][0]:
         return total_average[0][0]
       return 0
+    except:
+      return 0
+    
+  def searchAo5(self, solve_date):
+    self._refresh_connection()
+    
+    try:
+      query = "SELECT * FROM three_cube_ao5 WHERE ao5_date = %s"
+      self.cursor.execute(query, (solve_date,))
+      ao5 = self.cursor.fetchall()
+      return ao5
+    except:
+      return 0
+  
+  def searchAo12(self, solve_date):
+    self._refresh_connection()
+
+    try:
+      query = "SELECT * FROM three_cube_ao12 WHERE ao12_date = %s"
+      self.cursor.execute(query, (solve_date,))
+      ao12 = self.cursor.fetchall()
+      return ao12
     except:
       return 0

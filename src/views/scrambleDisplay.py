@@ -142,6 +142,9 @@ class ScrambleDisplay(QWidget):
     # Add button layout to main layout
     layout.addLayout(button_layout)
 
+    dialog.setFixedWidth(700)
+    dialog.setFixedHeight(100)
+    
     # Execute dialog and return the input text on accept
     if dialog.exec_() == QDialog.Accepted:
       input_text = line_edit.text()

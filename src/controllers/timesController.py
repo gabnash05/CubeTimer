@@ -17,12 +17,23 @@ class TimesController():
     recent_times = self.db.getTimeRecords()
     return recent_times
 
+  def searchTime(self, solve_id):
+    try:
+      return self.db.searchTimeRecord(solve_id)
+    except Exception as e:
+      print(str(e))
+
   def deleteTime(self, solve_id):
     try:
       if self.confirmDeletion():
         self.db.deleteTimeRecord(solve_id)
+        self.main_window.stop_watch.recent_times_display.renderList()
+        return True
+      else:
+        return False
     except Exception as e:
       print(str(e))
+      return False
   
   def plus2Time(self, solve_id):
     self.db.plus2TimeRecord(solve_id)
@@ -61,10 +72,15 @@ class TimesController():
   def getAverageTime(self):
     return self.db.getTotalAverageRecord()
 
+  def searchAo5(self, ao5_date):
+    return self.db.searchAo5(ao5_date)
 
-
-
+  def searchAo12(self, ao12_date):
+    return self.db.searchAo12(ao12_date)
     
+  def updateScramble(self, solve_id, solve_scramble):
+    self.db.updateTimeScramble(solve_id, solve_scramble)
+
 
 
   def confirmDeletion(self):
