@@ -29,5 +29,3 @@ def generateScramble(length=20):
     last_face = face
   
   return ' '.join(scramble)
-
-print(generateScramble())
